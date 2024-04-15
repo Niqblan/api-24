@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body { /*fondo*/
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    --s: 37px; 
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+    background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+      var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+      var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
+    background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
+  }
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 20px;
+    padding: 20px; 
+  }
+  
+  #heading {
+    text-align: center;
+    margin: 2em;
+    color: rgb(0, 255, 200);
+    font-size: 1.5em;
+  }
+  
+  .field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  }
+  
+  .input-icon {
+    height: 1.4em;
+    width: 1.4em;
+    fill: rgb(0, 255, 200);
+  }
+
+  .input-icon-mail {
+    height: 1.2em;
+    width: 1.2em;
+    fill: rgb(0, 255, 200);
+  }
+  
+  .input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(0, 255, 200);
+  }
+
+  .input-field:-webkit-autofill,
+  .input-field:-webkit-autofill:hover, 
+  .input-field:-webkit-autofill:focus, 
+  .input-field:-webkit-autofill:active {
+      background-color: #171717; /* Mantén el color de fondo */
+      -webkit-text-fill-color: rgb(0, 255, 200); /* Mantén el color del texto */
+      -webkit-box-shadow: 0 0 0 30px #171717 inset
+  }
+
+  
+  .form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2.5em;
+  }
+  
+  .button2 {
+    padding: 0.5em;
+    margin-bottom: 20px;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    color: rgb(0, 0, 0);
+  }
+  
+  .button2:hover {
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(0, 255, 200);
+  }
+  
+ 
+  .card {
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    border-radius: 22px;
+    transition: all .3s;
+    max-width: 400px; 
+    margin: 0 auto; 
+    
+  }
+  
+  .card2 {
+    border-radius: 20px;
+    transition: all .2s; 
+  }
+  
+  .card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+  }
+
+  .text-slate-700 {
+    color: #2562be; /* Color de fuente predeterminado */
+  }
+  
+  .text-slate-700:hover,
+  .text-slate-700:focus {
+    color: rgb(0, 255, 200); /* Color de fuente al pasar el mouse o al enfocar el enlace */
+  }
+
+  .already-have-account {
+    color: #b1a6a2; /* Color de fuente predeterminado */
+  }
+
+
