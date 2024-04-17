@@ -5,7 +5,7 @@ import './SliderComponent.css'
   function SliderComponent() {
     
   return(
-  <div className='container'>
+  <div className='container2'>
     <swiper-container loop={true} space-between='4' slides-per-view="5"
         navigation="true"
         style={{

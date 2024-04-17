@@ -1,6 +1,6 @@
-.container {
-    width: 100%; /* Ocupa toda la pantalla */
-    height: auto; /* Altura automática */
+.container2 {
+    width: 100%; 
+    height: auto;
   }
   
   swiper-container {
@@ -18,5 +18,5 @@
   
   swiper-wrapper {
     display: flex;
-    transition: transform 0.3s ease; /* Animación de transición */
+    transition: transform 0.3s ease;
   }
