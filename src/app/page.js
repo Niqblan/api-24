@@ -12,7 +12,7 @@ export default function Home() {
     <div className="flex flex-col w-full">
       <Header />
     <div className="h-[1500px] flex flex-col justify-center gap-10 text-white" style={{ marginLeft: '5px', marginTop: '130px'}}>
-      <div className='flex flex-col gap-2 h-[200px] px-8' >
+      <div className='flex flex-col gap-2 h-[200px] px-8 ' >
         <h1 className="titulo">Nuevos & Populares</h1>
         <SliderComponent />
       </div>
@@ -21,11 +21,23 @@ export default function Home() {
         <SliderComponent />
       </div>
       <div className='flex flex-col gap-2 h-[200px] px-8'>
-        <h1 className="titulo">Pelis</h1>
+        <h1 className="titulo">Romantico</h1>
         <SliderComponent />
       </div>
       <div className='flex flex-col gap-2 h-[200px] px-8'>
-        <h1 className="titulo">Pelis</h1>
+        <h1 className="titulo">Suspenso</h1>
+        <SliderComponent />
+      </div>
+      <div className='flex flex-col gap-2 h-[200px] px-8'>
+        <h1 className="titulo">Thriller Psicologico</h1>
+        <SliderComponent />
+      </div>
+      <div className='flex flex-col gap-2 h-[200px] px-8'>
+        <h1 className="titulo">Acción</h1>
+        <SliderComponent />
+      </div>
+      <div className='flex flex-col gap-2 h-[200px] px-8'>
+        <h1 className="titulo">Drama</h1>
         <SliderComponent />
       </div>
     </div>
