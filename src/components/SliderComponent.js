@@ -1,12 +1,27 @@
 'use client';
-import React from 'react';
-import './SliderComponent.css'
+import React, { useState, useEffect } from 'react';
+import './SliderComponent.css';
 
-  function SliderComponent() {
-    
-  return(
-  <div className='container2'>
-    <swiper-container loop={true} space-between='4' slides-per-view="6"
+function SliderComponent() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=5db3f946279d2d0bc22ef0c02f471fa8');
+        const data = await response.json();
+        setMovies(data.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className='container2'>
+      <swiper-container loop={true} space-between='4' slides-per-view="6"
         navigation="true"
         style={{
           "--swiper-navigation-color": "#fff",
@@ -16,22 +31,15 @@ import './SliderComponent.css'
           "--swiper-navigation-sides-offset": "10px",
           "--swiper-navigation-color": "var(--swiper-theme-color)"
         }}>
-      <swiper-slide>slide1</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide</swiper-slide>
-      <swiper-slide>slide13</swiper-slide>
-      
-    </swiper-container>
-  </div>
-  )}
+        {movies.map(movie => (
+          <swiper-slide key={movie.id}>
+            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+            <p>{movie.title}</p>
+          </swiper-slide>
+        ))}
+      </swiper-container>
+    </div>
+  );
+}
 
 export default SliderComponent;
