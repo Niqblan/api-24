@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import './SliderComponent.css';
 
-function SliderComponent() {
+function SliderComponent({ genre }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=5db3f946279d2d0bc22ef0c02f471fa8');
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&language=en&api_key=5db3f946279d2d0bc22ef0c02f471fa8`);
         const data = await response.json();
         setMovies(data.results);
       } catch (error) {
@@ -17,7 +17,7 @@ function SliderComponent() {
     };
 
     fetchData();
-  }, []);
+  }, [genre]);
 
   return (
     <div className='container2'>
