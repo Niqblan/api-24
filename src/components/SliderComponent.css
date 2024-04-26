@@ -21,4 +21,15 @@
     transition: transform 0.3s ease;
   }
 
+  /* input de busqueda */
+  .field {
+    border-radius: 30px;
+    outline: none;
+    padding: 0.6em;
+    border: none;
+    width: 100%;
+    color: rgb(0, 255, 200);
+    background-color: #282828;
+  }
+
   

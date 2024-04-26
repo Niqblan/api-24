@@ -1,17 +1,17 @@
-// components/MovieSearch.js
 
 import { useState } from 'react';
+import React from 'react'; 
+import './SliderComponent.css';
 
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
-
+  
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8=${searchTerm}` 
-         /*poner key aca, no e sta en funcionamiento*/
+        `https://api.themoviedb.org/3/search/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8&query=${searchTerm}` 
         
       );
       const data = await response.json();
@@ -22,23 +22,22 @@ const MovieSearch = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-xl font-semibold mb-4">Movie Search</h1>
-      <form onSubmit={handleSearch} className="flex mb-4">
+    <div >
+      <form onSubmit={handleSearch} className="flex mb-4" style={{ marginTop: '10px'}}>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Busca una pelicula..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="field"
         />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        <button type="submit" className= "bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">
           Buscar
         </button>
       </form>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-md">
+          <div key={movie.id} className="bg-gray-600 rounded-lg overflow-hidden shadow-md">
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}

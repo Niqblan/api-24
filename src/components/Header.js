@@ -10,8 +10,8 @@ export default function Header(){
     
       <MovieSearch/>
       <div>
-        <a href='./signIn' className=" bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">Inicia Sesión!</a>
-        <a href='./signUp' className=" bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">Registrate!</a>
+        <a href='./signIn' className=" bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-2 mx-2">Inicia Sesión!</a>
+        <a href='./signUp' className=" bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-2 mx-2">Registrate!</a>
       </div>
           </div>
 
