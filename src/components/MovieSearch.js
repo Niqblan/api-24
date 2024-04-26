@@ -7,13 +7,12 @@ const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
   
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async () => {
     try {
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8&query=${searchTerm}` 
-        
       );
+
       const data = await response.json();
       setMovies(data.results);
     } catch (error) {
@@ -21,17 +20,29 @@ const MovieSearch = () => {
     }
   };
 
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+    if (e.target.value.length > 2) { // Realizar la búsqueda solo si el término tiene más de 2 caracteres
+      handleSearch();
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
   return (
-    <div >
-      <form onSubmit={handleSearch} className="flex mb-4" style={{ marginTop: '10px'}}>
+    <div>
+      <form onSubmit={handleSubmit} className="flex mb-4" style={{ marginTop: '10px'}}>
         <input
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleChange}
           placeholder="Busca una pelicula..."
           className="field"
         />
-        <button type="submit" className= "bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">
+        <button type="submit" className="bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">
           Buscar
         </button>
       </form>
