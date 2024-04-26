@@ -39,6 +39,8 @@ function SliderComponent({ genre }) {
         ))}
       </swiper-container>
     </div>
+
+    
   );
 }
 
