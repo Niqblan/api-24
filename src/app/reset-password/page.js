@@ -13,7 +13,7 @@ import './styles.css';
         <div className="card">
           <div className="card2">
             <form className="form">
-              <p id="heading">Resetear Contraseña</p>
+              <p id="heading">Restablecer Contraseña</p>
               <p className="message">Ingresá el mail con el que te registraste y te enviaremos un correo para recuperar tu cuenta</p>
               <div className="field">
                 <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" className="input-icon">
