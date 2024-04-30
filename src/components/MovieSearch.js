@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import React from 'react'; 
 import './SliderComponent.css';
+import './MovieSearch.css';
 
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,14 +34,14 @@ const MovieSearch = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="flex mb-4" style={{ marginTop: '10px'}}>
+    <div >
+      <form onSubmit={handleSubmit} className="flex justify-center mb-4 px-1" style={{ marginTop: '100px', marginBottom: '70px'}}>
         <input
           type="text"
           value={searchTerm}
           onChange={handleChange}
           placeholder="Busca una pelicula..."
-          className="field"
+          className="field2"
         />
         <button type="submit" className="bg-gradient-to-r from-green-500 to-indigo-600 text-black hover:bg-white hover:text-black hover:rounded-xl rounded-xl px-3 py-1 mx-2">
           Buscar
@@ -48,17 +49,26 @@ const MovieSearch = () => {
       </form>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="bg-gray-600 rounded-lg overflow-hidden shadow-md">
+          <div key={movie.id} className="carta">
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
               className="w-full h-64 object-cover object-center"
             />
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-2">{movie.title}</h2>
-              <p className="text-gray-700">{movie.overview}</p>
+              <div className="p-6">
+                <h2 className="titulo2">{movie.title}</h2>
+                <div class="checkbox-wrapper">
+                  <label class="toggleButton">
+                    <input type="checkbox" />
+                    <div>
+                      <svg viewBox="0 0 44 44">
+                        <path transform="translate(-2.000000, -2.000000)" d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"></path>
+                      </svg>
+                    </div>
+                  </label>
+                </div>
+              </div>
             </div>
-          </div>
         ))}
       </div>
     </div>
