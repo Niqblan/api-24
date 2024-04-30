@@ -32,4 +32,18 @@
     background-color: #282828;
   }
 
+  /* cards cuando buscas */
+
+  .card {
+    background-color: #282828;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    color: rgb(0, 255, 200);
+  }
+  
+  .titulo2 {
+    color: rgb(0, 255, 200);
+    font-size: 1.2em; 
+}
   
