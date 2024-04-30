@@ -22,9 +22,12 @@ const MovieSearch = () => {
   };
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-    if (e.target.value.length > 2) { // Realizar la búsqueda solo si el término tiene más de 2 caracteres
-      handleSearch();
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+    if (searchTerm.length > 1) { 
+      handleSearch(searchTerm);
+    } else {
+      setMovies([]); 
     }
   };
 
