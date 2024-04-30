@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './SliderComponent.css';
-import MovieSearch from './MovieSearch';
 import MovieFilters from './MovieFilters';
 
 
