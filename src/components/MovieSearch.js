@@ -55,11 +55,11 @@ const MovieSearch = () => {
         {filteredMovies.map((movie) => (
           <div key={movie.id} className="carta">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
               alt={movie.title}
-              className="w-full h-64 object-cover object-center "
+              className="w-full h-[250px] object-cover"
             />
-            <div className="p-6">
+            <div className="p-6 flex gap-4">
               <h2 className="titulo2">{movie.title}</h2>
               <div className="checkbox-wrapper">
                 <label className="toggleButton">

@@ -33,8 +33,7 @@ function SliderComponent({ genre }) {
         }}>
         {movies.map(movie => (
           <swiper-slide key={movie.id}>
-            <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
-            <p>{movie.title}</p>
+            <img className='object-cover' src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
           </swiper-slide>
         ))}
       </swiper-container>
