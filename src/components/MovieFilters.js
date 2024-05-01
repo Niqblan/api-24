@@ -21,12 +21,7 @@ const MovieFilters = ({ onApplyFilters }) => {
     }
   };
 
-  const handleApplyFilters = () => {
-    // Llamar a la función de devolución de llamada onApplyFilters con los filtros seleccionados
-    onApplyFilters({
-      genre: selectedGenre,
-    });
-  };
+
 
   return (
     <div>
@@ -36,7 +31,7 @@ const MovieFilters = ({ onApplyFilters }) => {
           <option key={genre.id} value={genre.id}>{genre.name}</option>
         ))}
       </select>
-      <button onClick={handleApplyFilters}  style={{ backgroundColor: 'white', color: 'black' }} >Aplicar filtros</button>
+      
     </div>
   );
 };
