@@ -27,7 +27,9 @@ export default function Inicio() {
                 <button className="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iniciar Sesión&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <a href="./signUp" className="button2">Registrarse</a>
               </div>
-              <a href='./reset-password' className="button3" >¿Olvidaste tu contraseña?</a>
+              <div className="btn2">
+                <a href='./reset-password' className="button3" >¿Olvidaste tu contraseña?</a>
+              </div>
             </form>
           </div>
         </div>
