@@ -1,39 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-const MovieFilters = ({ onApplyFilters }) => {
-  const [genres, setGenres] = useState([]);
+export default function MovieFilters() {
+  const router = useRouter();
   const [selectedGenre, setSelectedGenre] = useState('');
 
-  useEffect(() => {
-    // Obtener lista de géneros desde la API de TMDb
-    fetchGenres();
-  }, []);
+  const generos = [
+    { id: 878, nombre: "Ciencia Ficción" },
+    { id: 16, nombre: "Animadas" },
+    { id: 12, nombre: "Aventura" },
+    { id: 35, nombre: "Comedia" },
+    { id: 27, nombre: "Terror" },
+    { id: 53, nombre: "Suspenso" },
+    { id: 18, nombre: "Drama" },
+    { id: 99, nombre: "Documentales" },
+    { id: 36, nombre: "Historia" },
+    { id: 10402, nombre: "Musicales" },
+    { id: 37, nombre: "Cowboys" },
+    { id: 14, nombre: "Fantasía" },
+    { id: 10752, nombre: "Guerra" },
+    { id: 80, nombre: "Crimen" },
+    { id: 10749, nombre: "Romance" },
+  ];
 
-  const fetchGenres = async () => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=5db3f946279d2d0bc22ef0c02f471fa8`
-      );
-      const data = await response.json();
-      setGenres(data.genres);
-    } catch (error) {
-      console.error('Error al obtener la lista de géneros:', error);
-    }
+  const handleChange = (event) => {
+    const selectedGenreId = event.target.value;
+    setSelectedGenre(selectedGenreId);
+    router.push(`/generos/${selectedGenreId}`);
   };
 
-
-
   return (
-    <div>
-      <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
-        <option value="">Selecciona un género</option>
-        {genres.map((genre) => (
-          <option key={genre.id} value={genre.id}>{genre.name}</option>
+    <div className='custom-select'>
+      <select value={selectedGenre} onChange={handleChange}>
+        <option value="" disabled hidden>Géneros</option>
+        {generos.map((genero) => (
+          <option key={genero.id} value={genero.id}>{genero.nombre}</option>
         ))}
       </select>
-      
     </div>
   );
 };
-
-export default MovieFilters;
