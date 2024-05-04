@@ -22,7 +22,7 @@ function SliderComponent({ genre }) {
   return (
     <div className='container2'>
       <swiper-container loop={true} space-between='4' slides-per-view="6"
-      breakpoints={JSON.stringify({400: { slidesPerView: 1, spaceBetween:4 }, 640: { slidesPerView: 1, spaceBetween:4 }, 768: { slidesPerView: 4, spaceBetween:4}, 1024: { slidesPerView: 5, spaceBetween:4}, 1280: { slidesPerView: 6, spaceBetween:4},})}
+      breakpoints={JSON.stringify({400: { slidesPerView: 1, spaceBetween:4 }, 640: { slidesPerView: 2, spaceBetween:4 }, 768: { slidesPerView: 4, spaceBetween:4}, 1024: { slidesPerView: 5, spaceBetween:4}, 1280: { slidesPerView: 6, spaceBetween:4},})}
         navigation="true"
         style={{
           "--swiper-navigation-color": "#fff",
