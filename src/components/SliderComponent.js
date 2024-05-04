@@ -1,9 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import './SliderComponent.css';
+import { useRouter } from 'next/navigation';
 
 function SliderComponent({ genre }) {
   const [movies, setMovies] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +35,7 @@ function SliderComponent({ genre }) {
           "--swiper-navigation-color": "var(--swiper-theme-color)"
         }}>
         {movies.map(movie => (
-          <swiper-slide key={movie.id}>
+          <swiper-slide key={movie.id} onClick={()=>router.push(`movies/${movie.id}`)} style={{ cursor: 'pointer' }} >
             <img className='object-cover' src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
           </swiper-slide>
         ))}
