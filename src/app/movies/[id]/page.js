@@ -26,11 +26,17 @@ function MovieDetails() {
 
   /*HACER ESTILOS*/
   return (
-    <div>
-      <h1>{movieDetails.title}</h1>
-      <p>{movieDetails.overview}</p>
-      <p>Fecha de Lanzamiento: {movieDetails.release_date}</p>
-      <p>Duracion: {movieDetails.runtime} minutos</p>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="">
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+            className="w-full h-64 object-cover object-center"></img>
+          <h1>{movieDetails.title}</h1>
+          <p>{movieDetails.overview}</p>
+          <p>Fecha de Lanzamiento: {movieDetails.release_date}</p>
+          <p>Duracion: {movieDetails.runtime} minutos</p>
+      </div>
     </div>
   );
 }
