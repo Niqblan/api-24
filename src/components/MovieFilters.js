@@ -30,9 +30,9 @@ export default function MovieFilters() {
   };
 
   return (
-    <div className='custom-select'>
-      <select value={selectedGenre} onChange={handleChange}>
-        <option value="" disabled hidden>Géneros</option>
+    <div className='select-container ' >
+      <select value={selectedGenre} onChange={handleChange} className="selectH" style={{ cursor: 'pointer' }}>
+        <option value="" disabled hidden>Seleccionar género</option>
         {generos.map((genero) => (
           <option key={genero.id} value={genero.id}>{genero.nombre}</option>
         ))}

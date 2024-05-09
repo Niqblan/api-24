@@ -7,6 +7,7 @@ export default function Inicio() {
 
   return (
       <div className="container"> 
+        <h1 className="h1">Esto Es Cine</h1>
         <div className="card">
           <div className="card2">
             <form className="form">
