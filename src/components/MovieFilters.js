@@ -31,10 +31,10 @@ export default function MovieFilters() {
 
   return (
     <div className='select-container ' >
-      <select value={selectedGenre} onChange={handleChange} className="selectH" style={{ cursor: 'pointer' }}>
+      <select value={selectedGenre} onChange={handleChange} className="selectH " style={{ cursor: 'pointer' }}>
         <option value="" disabled hidden>Seleccionar género</option>
         {generos.map((genero) => (
-          <option key={genero.id} value={genero.id}>{genero.nombre}</option>
+          <option className="border-radius-sm " key={genero.id} value={genero.id}>{genero.nombre}</option>
         ))}
       </select>
     </div>
