@@ -55,7 +55,7 @@ function MovieDetails() {
       <p>Fecha de Lanzamiento: {movieDetails.release_date}</p>
       <p>Duración: {movieDetails.runtime} minutos</p>
       <p>Género: {genres}</p>
-      <button onClick={handleWatchTrailer} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 ">
+      <button onClick={handleWatchTrailer} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 ">
             Ver Tráiler
       </button>
       </div>
