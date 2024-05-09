@@ -6,7 +6,7 @@ export default function Header() {
 
   return (
     <div className="bg-black w-full py-4 px-4 flex flex-wrap items-center justify-between">
-      <a href='./' className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" style={{cursor: 'pointer' , backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Esto Es Cine</a>
+      <a href='../' className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" style={{cursor: 'pointer' , backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Esto Es Cine</a>
       <MovieFilters />
       
       <div className="flex flex-wrap justify-end gap-2">
