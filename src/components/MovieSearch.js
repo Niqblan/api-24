@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SliderComponent.css';
 import './MovieSearch.css';
+import { BurgerSpin } from "react-burger-icons";
 
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +23,10 @@ const MovieSearch = () => {
           apiUrl = `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=5db3f946279d2d0bc22ef0c02f471fa8`;
           const movieCreditsResponse = await fetch(apiUrl);
           const movieCreditsData = await movieCreditsResponse.json();
-          setFilteredMovies(movieCreditsData.cast);
+          setFilteredMovies(movieCreditsData.cast.map(movie => ({
+            ...movie,
+            isClosed: true // Añade el estado individual para cada película
+          })));
         } else {
           setFilteredMovies([]);
         }
@@ -31,13 +35,19 @@ const MovieSearch = () => {
         apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8&year=${searchTerm}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
-        setFilteredMovies(data.results);
+        setFilteredMovies(data.results.map(movie => ({
+          ...movie,
+          isClosed: true // Añade el estado individual para cada película
+        })));
       } else {
         // Búsqueda por título de película
         apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8&query=${searchTerm}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
-        setFilteredMovies(data.results);
+        setFilteredMovies(data.results.map(movie => ({
+          ...movie,
+          isClosed: true // Añade el estado individual para cada película
+        })));
       }
     } catch (error) {
       console.error('Error al buscar películas:', error);
@@ -64,6 +74,14 @@ const MovieSearch = () => {
     handleSearch(searchTerm, searchCriterio);
   };
 
+  const toggleIsClosed = (index) => {
+    setFilteredMovies(prevState =>
+      prevState.map((movie, i) =>
+        i === index ? { ...movie, isClosed: !movie.isClosed } : movie
+      )
+    );
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-column justify-center mb-4 px-1 gap-1" style={{ marginTop: '150px', marginBottom: '70px'}}>
@@ -81,7 +99,7 @@ const MovieSearch = () => {
         </select>
       </form>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filteredMovies.map((movie) => (
+        {filteredMovies.map((movie, index) => (
           <div key={movie.id} className="carta">
             <img
               src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
@@ -91,6 +109,18 @@ const MovieSearch = () => {
             <div className="p-6 flex gap-4">
               <h2 className="titulo2">{movie.title}</h2>
               <div className="checkbox-wrapper">
+                <button
+                  onClick={() => toggleIsClosed(index)}
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    display: "grid",
+                    placeItems: "center",
+                    marginLeft:"200px",
+                  }}
+                >
+                  <BurgerSpin isClosed={movie.isClosed} />
+                </button>
               </div>
             </div>
           </div>
@@ -101,4 +131,5 @@ const MovieSearch = () => {
 };
 
 export default MovieSearch;
+
 
