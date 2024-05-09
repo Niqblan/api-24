@@ -3,6 +3,7 @@ import './SliderComponent.css';
 import './MovieSearch.css';
 import { BurgerSpin } from "react-burger-icons";
 
+
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);

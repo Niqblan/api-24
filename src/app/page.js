@@ -5,6 +5,7 @@ import './globals.css';
 import { register } from "swiper/element/bundle";
 import MovieSearch from '@/components/MovieSearch';
 import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
 register();
 
 
@@ -16,6 +17,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full" >
+      <Header/>
       <MovieSearch />
       <div className="flex flex-col justify-center gap-[4em] text-white" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
       <div className='flex flex-col gap-2 h-auto px-8 ' >
