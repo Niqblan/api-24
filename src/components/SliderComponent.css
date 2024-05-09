@@ -61,7 +61,18 @@
   }
 
   /*SELECT DE HEADER*/
-  
+  .selectH {
+    outline: none;
+    padding: 0.6em;
+    border: none;
+    width: 190px;
+    color: rgb(143, 146, 143);
+    position: relative; 
+    font-size: 1em;
+    z-index: 1; 
+    background-color: rgb(0, 0, 0); 
+}
+
 
   /*---------------------------------------------------------------------------------*/
 
@@ -74,34 +85,19 @@
     width: 25%;
     color: rgb(0, 255, 200);
     background-color: rgb(56, 56, 56);
-    
+
   }
 
-  /* cards cuando buscas */
-
-  .carta {
-    background-color: #282828;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
+  .field3 {
+    border-radius: 30px;
+    outline: none;
+    padding: 0.6em;
+    border: none;
+    width: 7%;
     color: rgb(0, 255, 200);
+    background-color: rgb(56, 56, 56);
   }
-  
-  .titulo2 {
-    color: rgb(0, 255, 200);
-    font-size: 1.2em; 
-}
-  
-.titulo3 {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  color: rgb(108, 109, 108);
-  font-size: 1.2em; 
-  margin-top: 10px;
-  margin-left: 100px;
-  white-space: nowrap; 
-}
+
 
 
 
