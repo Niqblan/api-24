@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "next/navigation";
+import Header from '@/components/Header';
 
 function FiltradoPorGenero({ genre }) {
   const [movies, setMovies] = useState([]);
@@ -21,6 +22,8 @@ function FiltradoPorGenero({ genre }) {
   }, []);
 
   return (
+    <div className="container mx-auto px-4 py-8 max-w-full ">
+      <Header />
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {movies.map((movie) => (
         <div key={movie.id} className="carta">
@@ -37,6 +40,7 @@ function FiltradoPorGenero({ genre }) {
         </div>
       ))}
     </div>
+  </div>
   );
 }
 
