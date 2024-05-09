@@ -87,7 +87,7 @@ const MovieSearch = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex flex-column justify-center mb-4 px-1 gap-1" style={{ marginTop: '150px', marginBottom: '70px'}}>
+      <form onSubmit={handleSubmit} className="flex flex-column justify-center mb-4 px-1 gap-1" style={{ marginTop: '200px', marginBottom: '70px'}}>
         <input
           type="text"
           value={searchTerm}
