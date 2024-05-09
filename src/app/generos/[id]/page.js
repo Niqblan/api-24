@@ -28,9 +28,9 @@ function FiltradoPorGenero({ genre }) {
       {movies.map((movie) => (
         <div key={movie.id} className="carta">
           <img
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
             alt={movie.title}
-            className="w-full h-64 object-cover object-center"
+            className="w-full h-[350px] object-center"
           />
           <div className="p-6">
             <h2 className="titulo2">{movie.title}</h2>

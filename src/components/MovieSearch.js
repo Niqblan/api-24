@@ -84,9 +84,9 @@ const MovieSearch = () => {
         {filteredMovies.map((movie) => (
           <div key={movie.id} className="carta">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               alt={movie.title}
-              className="w-full h-[250px] object-cover"
+              className="w-full h-[350px] object-center"
             />
             <div className="p-6 flex gap-4">
               <h2 className="titulo2">{movie.title}</h2>
