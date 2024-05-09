@@ -15,8 +15,8 @@ export default function Header() {
       <MovieFilters />
       
       <div className="flex justify-end gap-2">
-        <p onClick={()=>router.push("signIn")} className="botonH">Inicia Sesión</p>
-        <p onClick={()=>router.push("signUp")} className="botonH2">Regístrate</p>
+        <p onClick={()=>router.push("../signIn")} className="botonH" style={{cursor: 'pointer'}}>Inicia Sesión</p>
+        <p onClick={()=>router.push("../signUp")} className="botonH2" style={{cursor: 'pointer'}}>Regístrate</p>
       </div>
     </div>
   );

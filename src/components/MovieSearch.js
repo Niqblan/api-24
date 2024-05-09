@@ -107,9 +107,11 @@ const MovieSearch = () => {
               alt={movie.title}
               className="w-full h-[350px] object-center"
             />
-            <div className="p-6 flex gap-4">
+            <div className="p-6 gap-4">
               <h2 className="titulo2">{movie.title}</h2>
-              <div className="checkbox-wrapper">
+              
+            </div>
+            <div className="checkbox-wrapper">
                 <button
                   onClick={() => toggleIsClosed(index)}
                   style={{
@@ -123,7 +125,6 @@ const MovieSearch = () => {
                   <BurgerSpin isClosed={movie.isClosed} />
                 </button>
               </div>
-            </div>
           </div>
         ))}
       </div>

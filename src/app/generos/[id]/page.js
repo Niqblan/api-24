@@ -1,10 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "next/navigation";
-
+import { BurgerSpin } from "react-burger-icons";
 
 function FiltradoPorGenero({ genre }) {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -12,35 +13,59 @@ function FiltradoPorGenero({ genre }) {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${id}&language=en&api_key=5db3f946279d2d0bc22ef0c02f471fa8`);
         const data = await response.json();
-        setMovies(data.results);
+        setFilteredMovies(data.results.map(movie => ({ ...movie, isClosed: true }))); 
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
+
+  const toggleIsClosed = (index) => {
+    setFilteredMovies(prevState =>
+      prevState.map((movie, i) =>
+        i === index ? { ...movie, isClosed: !movie.isClosed } : movie
+      )
+    );
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-full ">
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-20 ">
-      {movies.map((movie) => (
-        <div key={movie.id} className="carta">
-          <img
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            alt={movie.title}
-            className="w-full h-[350px] object-center"
-          />
-          <div className="p-6">
-            <h2 className="titulo2">{movie.title}</h2>
+    <div className="container mx-auto px-4 py-8 max-w-full">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-20">
+        {filteredMovies.map((movie, index) => (
+          <div key={movie.id} className="carta">
+            <img
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full h-[350px] object-center"
+            />
+            <div className="p-6">
+              <h2 className="titulo2">{movie.title}</h2>
+              <div className="checkbox-wrapper">
+              </div>
+            </div>
             <div className="checkbox-wrapper">
+              <button
+                onClick={() => toggleIsClosed(index)}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  display: "grid",
+                  placeItems: "center",
+                  marginLeft: "auto", 
+                  marginRight: "auto",
+                }}
+              >
+                <BurgerSpin isClosed={movie.isClosed} />
+              </button>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
   );
 }
 
 export default FiltradoPorGenero;
+
