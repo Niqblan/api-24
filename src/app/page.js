@@ -19,7 +19,7 @@ export default function Home() {
     <div className="flex flex-col w-full" >
       <Header/>
       <MovieSearch />
-      <div className="flex flex-col justify-center gap-[4em] text-white" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
+      <div className="flex flex-col justify-center gap-[4em] text-white" style={{ marginTop: '5vh', marginBottom: '10vh' }}>
       <div className='flex flex-col gap-2 h-auto px-8 ' >
         <h1 className="titulo">Nuevos & Populares</h1>
         <SliderComponent genre={28} />
