@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './SliderComponent.css';
 import './MovieSearch.css';
 import { BurgerSpin } from "react-burger-icons";
+import { useRouter } from 'next/navigation';
 
 
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchCriterio, setSearchCriterio] = useState('');
+  const router = useRouter();
 
   const handleSearch = async (searchTerm, searchCriterio) => {
     try {
@@ -111,19 +113,34 @@ const MovieSearch = () => {
               <h2 className="titulo2">{movie.title}</h2>
               
             </div>
-            <div className="checkbox-wrapper">
-                <button
-                  onClick={() => toggleIsClosed(index)}
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    display: "grid",
-                    placeItems: "center",
-                    marginLeft:"200px",
-                  }}
-                >
-                  <BurgerSpin isClosed={movie.isClosed} />
-                </button>
+            <div className="flex items-center gap-16 justify-center">
+                <svg
+                    className="h-8 w-8 text-white "
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    onClick={()=>router.push(`/movies/${movie.id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <button
+                    onClick={() => toggleIsClosed(index)}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      display: "grid",
+                      placeItems: "center",
+                      color: "white",
+                    }}
+                  >
+                    <BurgerSpin isClosed={movie.isClosed} />
+                  </button>
               </div>
           </div>
         ))}
