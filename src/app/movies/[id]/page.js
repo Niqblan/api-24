@@ -1,10 +1,13 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useParams } from "next/navigation";
+import { BurgerSpin } from "react-burger-icons";
 
 function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
+  const [isClosed, setIsClosed] = useState(true);
+
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -38,11 +41,11 @@ function MovieDetails() {
   if (!movieDetails) {
     return <div>Loading...</div>;
   }
-
+  
   const genres = movieDetails.genres.map(genre => genre.name).join(', ');
 
   return (
-  <div className="flex justify-center h-[100vh] w-[100vw] py-24 ">
+  <div className="flex flex-col justify-center items-center h-screen w-[100vw] py-28 ">
     <div className=" max-w-4xl p-6  bg-black rounded-lg shadow-lg text-white flex">
       <img
         src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
@@ -50,14 +53,27 @@ function MovieDetails() {
         className="w-1/2 rounded-l-lg"
       />
       <div className='flex flex-col p-6 w-1/2'>
-      <h1 className="text-xl font-bold mb-2 ">{movieDetails.title}</h1>
+      <h1 className="text-2xl font-bold mb-2 ">{movieDetails.title}</h1>
       <p className="mb-4">{movieDetails.overview}</p>
       <p>Fecha de Lanzamiento: {movieDetails.release_date}</p>
       <p>Duración: {movieDetails.runtime} minutos</p>
+      <p>Puntuación: {movieDetails.vote_average}</p>
       <p>Género: {genres}</p>
       <button onClick={handleWatchTrailer} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 ">
             Ver Tráiler
       </button>
+      <button
+      onClick={() => setIsClosed(!isClosed)}
+      style={{
+        width: "50px",
+        height: "50px",
+        display: "grid",
+        placeItems: "center",
+        marginTop: "20px",
+      }}
+    >
+      <BurgerSpin isClosed={isClosed} />
+    </button>
       </div>
     </div>
   </div>

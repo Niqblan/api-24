@@ -34,6 +34,7 @@ function FiltradoPorGenero({ genre }) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-full">
+      <h1 className="text-3xl font-bold mb-8">{genre}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-20">
         {filteredMovies.map((movie, index) => (
           <div key={movie.id} className="carta">
