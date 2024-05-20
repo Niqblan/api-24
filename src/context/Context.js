@@ -1,34 +1,38 @@
-import { createContext , useContext , useState} from 'react';
-import { users } from './mockdata'; 
+"use client"
+import { createContext, useState } from 'react';
+import { users } from '@/mock/mockdata';
+import { useRouter } from 'next/navigation';
 
-export const AuthContext = createContext();
+export const Context = createContext();
 
-export const AuthProvider = ({children}) => {
+export const Provider = ({ children }) => {
+    const router = useRouter();
     const [user, setUser] = useState({});
     const [logged, setLogged] = useState(false);
 
     const login = (userData) => {
         authUser(userData);
-    }
+    };
 
     const logout = () => {
         setUser({});
         setLogged(false);
-    }
+    };
 
     const authUser = (userData) => {
-        users.forEach(u => {
-            if (u.email === userData.email && u.password === userData.password) {
-                setUser(u);
-                setLogged(true);
-            }
-        })
-    }
+        const foundUser = users.find((u) => u.email === userData.email && u.password === userData.password);
+        if (foundUser) {
+            setUser(foundUser);
+            setLogged(true);
+            router.push('/');
+        } else {
+            console.log('Usuario o contraseña incorrectos');
+        }
+    };
 
     return (
-        <AuthContext.Provider value={{ user, logged, login, logout }}>
+        <Context.Provider value={{ user, logged, login, logout }}>
             {children}
-        </AuthContext.Provider>
+        </Context.Provider>
     );
-}
-
+};

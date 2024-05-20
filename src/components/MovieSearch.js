@@ -33,6 +33,24 @@ const MovieSearch = () => {
         } else {
           setFilteredMovies([]);
         }
+      } else if (searchCriterio === 'director') {
+        // Búsqueda por director
+        apiUrl = `https://api.themoviedb.org/3/search/person?api_key=5db3f946279d2d0bc22ef0c02f471fa8&query=${searchTerm}`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        if (data.results.length > 0) {
+          const directorId = data.results[0].id;
+          apiUrl = `https://api.themoviedb.org/3/person/${directorId}/movie_credits?api_key=5db3f946279d2d0bc22ef0c02f471fa8`;
+          const movieCreditsResponse = await fetch(apiUrl);
+          const movieCreditsData = await movieCreditsResponse.json();
+          setFilteredMovies(movieCreditsData.crew.filter(movie => movie.department === "Directing").map(movie => ({
+            ...movie,
+            isClosed: true // Añade el estado individual para cada película
+          })));
+        } else {
+          setFilteredMovies([]);
+        }
       } else if (searchCriterio === 'year') {
         // Búsqueda por año de lanzamiento
         apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=5db3f946279d2d0bc22ef0c02f471fa8&year=${searchTerm}`;
@@ -98,6 +116,7 @@ const MovieSearch = () => {
         <select value={searchCriterio} onChange={handleCriterioChange} className="field3">
           <option value="">Película</option>
           <option value="actor">Actor</option>
+          <option value="director">Director</option>
           <option value="year">Año</option> 
         </select>
       </form>
@@ -150,5 +169,6 @@ const MovieSearch = () => {
 };
 
 export default MovieSearch;
+
 
 

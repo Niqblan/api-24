@@ -60,6 +60,24 @@
     color: rgb(0, 255, 200);
   }
 
+  .botonH3 {
+    padding: 0.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 10em;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    color: rgb(0, 0, 0);
+  }
+  
+  .botonH3:hover {
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(0, 255, 200);
+  }
+
   /*SELECT DE HEADER*/
   .selectH {
     outline: none;

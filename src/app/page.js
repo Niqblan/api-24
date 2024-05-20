@@ -16,10 +16,10 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col w-full" >
+    <div className="flex flex-col w-full h-fit" >
       <Header/>
+      <div className="flex flex-col gap-[4em] text-white" >
       <MovieSearch />
-      <div className="flex flex-col justify-center gap-[4em] text-white" style={{ marginTop: '5vh', marginBottom: '10vh' }}>
       <div className='flex flex-col gap-2 h-auto px-8 ' >
         <h1 className="titulo">Nuevos & Populares</h1>
         <SliderComponent genre={28} />
@@ -85,6 +85,16 @@ export default function Home() {
         <SliderComponent genre={10749}/>
       </div>
     </div>  
+    <footer
+      className="bg-neutral-200 text-center dark:bg-neutral-700 lg:text-left mt-20">
+      <div className="p-4 text-center text-neutral-700 dark:text-neutral-200">
+        © 2024 Copyright:
+        <a
+          className="text-neutral-800 dark:text-neutral-400"
+          href="https://tw-elements.com/"
+        > Esto Es Cine Argentina</a>
+      </div>
+    </footer>
   </div>
 );
 }
