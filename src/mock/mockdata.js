@@ -15,7 +15,7 @@ export const users = [
     },
     {
       id:3,
-      email: 'juan@gmail.com',
+      email: 'emi@gmail.com',
       password: '1234',
       optCode: 9128,
       optExpiration: '2024-06-30',
