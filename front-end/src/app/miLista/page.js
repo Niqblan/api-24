@@ -1,12 +1,15 @@
 "use client";
+import './style.css';
 import React, { useEffect, useState } from "react";
 
 function Watchlist() {
   const [watchList, setWatchList] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [watched, setWatched] = useState([]);
+  const [activeList, setActiveList] = useState('watchList');
+  const [listsVisible, setListsVisible] = useState(true); 
 
-  const films = [1011985];
+  const films = [1011985, 550, 27205, 157336, 324857, 299534, 122, 272, 389, 13, 128, 429, 500, 769, 854];
 
   // Función para buscar y agregar video a la lista de espera
   async function searchVideo(id) {
@@ -34,12 +37,10 @@ function Watchlist() {
     films.forEach((f) => searchVideo(f));
   }, []);
 
-
   const moveToFavorites = (film) => {
     setFavorites((prevFavorites) => [...prevFavorites, film]);
     setWatchList((prevWatchList) => prevWatchList.filter((item) => item.id !== film.id));
   };
-
 
   const moveToWatched = (film) => {
     setWatched((prevWatched) => [...prevWatched, film]);
@@ -51,62 +52,75 @@ function Watchlist() {
     list((prevList) => prevList.filter((item) => item.id !== film.id));
   };
 
+  const renderList = (list, setList, additionalButtons = []) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      {list.length > 0 &&
+        list.map((film) => (
+          <div key={film.id} className="carta1">
+            <img
+              src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
+              alt={film.title}
+              className="w-full h-[350px] object-center"
+            />
+            <h2 className="peli">{film.title}</h2>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {additionalButtons.map((button) => (
+                <button
+                  key={button.label}
+                  className="text-gray-400 flex-1"
+                  onClick={() => button.onClick(film)}
+                >
+                  {button.label}
+                </button>
+              ))}
+            </div>
+            <button className="text-red-500 flex-1 mt-3" onClick={() => removeFromList(setList, film)}>Eliminar</button>
+          </div>
+        ))}
+    </div>
+  );
+
+  const showLists = () => {
+    setListsVisible(true);
+  };
+
   return (
-    <div className="flex w-[100vw] min-h-[100vh] pt-[20vh] justify-center gap-[30em]">
-      <div className="flex flex-col h-3  items-center gap-4">
-        <h1 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl relative" style={{backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Quiero Ver</h1>
-        <div className="flex flex-col gap-4">
-          {watchList.length > 0 &&
-            watchList.map((film) => (
-              <div key={film.id} className="flex flex-col items-center gap-2">
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${film.backdrop_path}`}
-                  alt={film.title}
-                  className="rounded-md hover:scale-[1.03] hover:opacity-30 duration-300 "
-                />
-                <h2 className="text-white">{film.title}</h2>
-                <button className="text-gray-400" onClick={() => moveToWatched(film)}>Mover a Vistas</button>
-                <button className="text-gray-400" onClick={() => moveToFavorites(film)}>Mover a favoritas</button>
-                <button className="text-red-500" onClick={() => removeFromList(setWatchList, film)}>Eliminar</button>
-              </div>
-            ))}
-        </div>
+    <div className="flex flex-col w-full min-h-screen pt-16 items-center">
+      <div className="flex flex-wrap gap-2 mb-4 mt-14">
+        <button
+          className={`button1 ${activeList === 'watchList' ? 'active' : ''}`}
+          onClick={() => { setActiveList('watchList'); showLists(); }}
+        >
+          Quiero Ver
+        </button>
+        <button
+          className={`button2 ${activeList === 'favorites' ? 'active' : ''}`}
+          onClick={() => { setActiveList('favorites'); showLists(); }}
+        >
+          Favoritos
+        </button>
+        <button
+          className={`button3 ${activeList === 'watched' ? 'active' : ''}`}
+          onClick={() => { setActiveList('watched'); showLists(); }}
+        >
+          Vistas
+        </button>
       </div>
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" style={{backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Favoritos</h1>
-        <div className="flex flex-col gap-4">
-          {favorites.length > 0 &&
-            favorites.map((film) => (
-              <div key={film.id} className="flex flex-col items-center gap-2">
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${film.backdrop_path}`}
-                  alt={film.title}
-                  className="rounded-md hover:scale-[1.03] hover:opacity-30 duration-300 "
-                />
-                <h2 className="text-white">{film.title}</h2>
-                <button className="text-gray-400" onClick={() => moveToWatched(film)}>Mover a Vistas</button>
-                <button className="text-red-500" onClick={() => removeFromList(setFavorites, film)}>Eliminar</button>
-              </div>
-            ))}
+      {listsVisible && (
+        <div className="flex flex-col items-center gap-4 w-full">
+          {activeList === 'watchList' &&
+            renderList(watchList, setWatchList, [
+              { label: 'Mover a Favoritos', onClick: moveToFavorites },
+              { label: 'Mover a Vistas', onClick: moveToWatched }
+            ])}
+          {activeList === 'favorites' &&
+            renderList(favorites, setFavorites, [
+              { label: 'Mover a Vistas', onClick: moveToWatched },
+            ])}
+          {activeList === 'watched' &&
+            renderList(watched, setWatched)}
         </div>
-      </div>
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" style={{backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Vistas</h1>
-        <div className="flex flex-col gap-4">
-          {watched.length > 0 &&
-            watched.map((film) => (
-              <div key={film.id} className="flex flex-col items-center gap-2">
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${film.backdrop_path}`}
-                  alt={film.title}
-                  className="rounded-md hover:scale-[1.03] hover:opacity-30 duration-300 "
-                />
-                <h2 className="text-white">{film.title}</h2>
-                <button className="text-red-500" onClick={() => removeFromList(setWatched, film)}>Eliminar</button>
-              </div>
-            ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
