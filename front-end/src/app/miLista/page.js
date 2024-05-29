@@ -85,7 +85,7 @@ function Watchlist() {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen pt-16 items-center">
+    <div className="flex flex-col w-full min-h-screen h-full pt-16 items-center">
       <div className="flex flex-wrap gap-2 mb-4 mt-14">
         <button
           className={`button1 ${activeList === 'watchList' ? 'active' : ''}`}

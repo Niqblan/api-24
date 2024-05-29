@@ -45,7 +45,7 @@ function MovieDetails() {
   const genres = movieDetails.genres.map(genre => genre.name).join(', ');
 
   return (
-  <div className="flex flex-col justify-center items-center h-screen w-[100vw] py-28 ">
+  <div className="flex flex-col justify-center items-center h-full w-[100vw] py-28 ">
     <div className=" max-w-4xl p-6  bg-black rounded-lg shadow-lg text-white flex">
       <img
         src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}

@@ -25,7 +25,7 @@ export default function Header() {
         <p onClick={()=>router.push("../signIn")} className="botonH" style={{cursor: 'pointer'}}>Inicia Sesión</p>
         <p onClick={()=>router.push("../signUp")} className="botonH2" style={{cursor: 'pointer'}}>Regístrate</p>
       </div>:<div className='flex items-center gap-5'><h2 className='text-[#8f928f] '> Emiliano</h2>
-      <svg class="h-5 w-5 text-[#8f928f] ml-[-20px] "  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg> 
+      <svg className="h-5 w-5 text-[#8f928f] ml-[-20px] "  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg> 
       <p onClick={()=>router.push("../signIn")} className="botonH3 " style={{cursor: 'pointer'}}>Cerrar Sesión</p>
       </div>}
     </div>

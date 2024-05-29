@@ -8,7 +8,7 @@ export default function PaginaRegistro() {
     const [email, setEmail] = useState('');
   
     return (
-      <div className="container">
+      <div className="container h-full">
         <h1 className="h1">Esto Es Cine</h1>
         <div className="card">
           <div className="card2">
