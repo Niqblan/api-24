@@ -13,11 +13,10 @@ export default function Inicio() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    const userData = {
+    login({
       email: email,
       password: password
-    };
-    login(userData);
+    });
   };
 
   return (
