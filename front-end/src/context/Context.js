@@ -1,6 +1,5 @@
 "use client"
 import { createContext, useState } from 'react';
-import { users } from '@/mock/mockdata';
 import { useRouter } from 'next/navigation';
 
 export const Context = createContext();
