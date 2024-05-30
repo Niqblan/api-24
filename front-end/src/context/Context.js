@@ -2,6 +2,7 @@
 import { createContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+
 export const Context = createContext();
 
 export const Provider = ({ children }) => {
@@ -9,17 +10,62 @@ export const Provider = ({ children }) => {
     const [user, setUser] = useState({});
     const [logged, setLogged] = useState(false);
 
-    const login = async (userData) => {
-        await fetch('http://localhost:5000/api/users/login', {
-            method:"POST",
-            body: JSON.stringify(userData),
-            headers: {"Content-Type":"application/json"}
-        })
-            .then(response => response.json())
-            .then(data => {setUser(data), router.push("/") })
-            .catch(error => console.error('Error:', error));
+    async function login(user) {  // Función para iniciar sesión
+        console.log(user);
 
-    };
+        const options = {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        await fetch('http://localhost:5000/api/users/login', options)
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((data) => {
+                    throw new Error('Error en la petición' || data.error);
+                    });
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setUser(data);
+                setLogged(true);
+                router.push('/');
+            })
+            .catch((error) => console.log(error));
+        }
+
+    async function register(user) {       // Función para registrar un usuario
+        console.log(user);
+
+        const options = {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        await fetch('http://localhost:5000/api/users/register', options)
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((data) => {
+                        throw new Error('Error en la petición' || data.error);
+                    });
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setUser(data);
+                setLogged(true);
+                router.push('/signIn');
+                
+            })
+            .catch((error) => console.log(error));
+        }   
 
     const logout = () => {
         setUser({});
@@ -27,7 +73,7 @@ export const Provider = ({ children }) => {
     };
 
     return (
-        <Context.Provider value={{ user, logged, login, logout }}>
+        <Context.Provider value={{ user, logged, login, logout, register }}>
             {children}
         </Context.Provider>
     );

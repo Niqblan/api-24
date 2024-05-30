@@ -1,11 +1,23 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './style.css';
+import { Context } from '../../context/Context';
 
 export default function PaginaRegistro() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const { register } = useContext(Context);
+  
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    register({
+      email: email,
+      password: password,
+      username: username
+    });
+  };
   
     return (
       <div className="container h-full">
@@ -34,7 +46,7 @@ export default function PaginaRegistro() {
                 <input type="password" className="input-field" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
               <div className="btn">
-                <button className="button2">Registrarse</button>
+                <button className="button2" onClick={handleRegister}>Registrarse</button>
               </div>
               <p className="mt-4 mb-0 leading-normal text-sm already-have-account">¿Ya tienes una cuenta? <a className="font-bold text-slate-700" href="./signIn">Iniciar sesión</a></p>
             </form>
