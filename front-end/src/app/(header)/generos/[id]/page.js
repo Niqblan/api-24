@@ -33,15 +33,15 @@ function FiltradoPorGenero({ genre }) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-full h-full">
+    <div className=" mx-auto px-4 py-8 max-w-full h-full">
       <h1 className="text-3xl font-bold mb-8">{genre}</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 pt-20">
         {filteredMovies.map((movie, index) => (
           <div key={movie.id} className="carta">
             <img
               src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               alt={movie.title}
-              className="w-full h-[350px] object-center"
+              className="w-full min-h-fit object-center"
             />
             <div className="p-6">
               <h2 className="titulo2">{movie.title}</h2>

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import SliderComponent from "@/components/SliderComponent";
-import './globals.css';
+import '../globals.css';
 import { register } from "swiper/element/bundle";
 import MovieSearch from '@/components/MovieSearch';
 import { useRouter } from 'next/navigation';

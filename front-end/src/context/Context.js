@@ -30,7 +30,7 @@ export const Provider = ({ children }) => {
                 return res.json();
             })
             .then((data) => {
-                console.log(data);
+                console.log("usuario logueado",data);
                 setUser(data);
                 setLogged(true);
                 router.push('/');

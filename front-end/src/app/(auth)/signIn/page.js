@@ -1,7 +1,7 @@
 'use client'
 import React, {useState, useContext} from 'react';
 import './style.css';
-import { Context } from '../../context/Context';
+import { Context } from '@/context/Context';
 
 
 

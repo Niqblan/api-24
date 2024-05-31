@@ -9,7 +9,7 @@ import { Context } from '@/context/Context';
 export default function Header() {
 
   const router = useRouter()
-  const { logged }=useContext(Context)
+  const { logged, user }=useContext(Context)
 
   return (
     <div className="bg-black w-full py-4 px-4 flex flex-wrap items-center justify-between fixed z-[99] top-0 ">
@@ -26,7 +26,7 @@ export default function Header() {
         </div>
       ) : (
         <div className='flex items-center gap-5'>
-          <h2 className='text-[#8f928f]'>Emiliano</h2>
+          <h2 className='text-[#8f928f]'>{user?.userName}</h2>
           <svg className="h-5 w-5 text-[#8f928f]" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  
             <path stroke="none" d="M0 0h24v24H0z"/>  
             <circle cx="12" cy="7" r="4" />  
