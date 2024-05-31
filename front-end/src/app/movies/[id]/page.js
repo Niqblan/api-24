@@ -1,12 +1,15 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "next/navigation";
 import { BurgerSpin } from "react-burger-icons";
+import { Context } from '@/context/Context';
+
 
 function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
   const [isClosed, setIsClosed] = useState(true);
+  const { logged }=useContext(Context);
 
 
   useEffect(() => {
@@ -45,8 +48,8 @@ function MovieDetails() {
   const genres = movieDetails.genres.map(genre => genre.name).join(', ');
 
   return (
-  <div className="flex flex-col justify-center items-center h-full w-[100vw] py-28 ">
-    <div className=" max-w-4xl p-6  bg-black rounded-lg shadow-lg text-white flex">
+  <div className="flex flex-col justify-center items-center w-[100vw]"> 
+    <div className={` max-w-4xl p-6  bg-black rounded-lg shadow-lg text-white flex ${logged? `mt-56` : `-mt-[83.5em]`}`}>
       <img
         src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
         alt={movieDetails.title}
