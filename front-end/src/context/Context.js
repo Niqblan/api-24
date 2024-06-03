@@ -67,7 +67,7 @@ export const Provider = ({ children }) => {
             .catch((error) => console.log(error));
         }   
 
-    const logout = () => {
+    const logout = () => { // Función para cerrar sesión
         setUser({});
         setLogged(false);
     };

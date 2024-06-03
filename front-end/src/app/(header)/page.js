@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import SliderComponent from "@/components/SliderComponent";
+import SliderPopulares from "@/components/SliderPopulares";
 import '../globals.css';
 import { register } from "swiper/element/bundle";
 import MovieSearch from '@/components/MovieSearch';
@@ -22,7 +23,7 @@ export default function Home() {
       <MovieSearch />
       <div className='flex flex-col gap-2 h-auto px-8 ' >
         <h1 className="titulo">Nuevos & Populares</h1>
-        <SliderComponent genre={28} />
+        <SliderPopulares />
       </div>
       <div className='flex flex-col gap-2 h-auto px-8 '>
         <h1 onClick={()=>router.push(`generos/${878}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Ciencia Ficción</h1>
