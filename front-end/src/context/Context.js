@@ -191,6 +191,7 @@ async function updateUserList(itemId, fromList, toList) {
     }
 }
 
+
 async function removeFromList(listName, itemId) {
     if (!logged) {
         console.error("User is not logged in");
