@@ -67,12 +67,12 @@ function MovieDetails() {
   const genres = movieDetails.genres.map(genre => genre.name).join(', ');
 
   return (
-    <div className="flex flex-col items-center w-full min-h-fit"> 
-      <div className={`max-w-4xl p-6 bg-black rounded-lg shadow-lg text-white flex ${logged ? 'mt-72 mb-16' : 'mt-36'}`}>`
+    <div className={`flex flex-col items-center w-full min-h-fit ${logged ? 'mt-44' : ''}`}> 
+      <div className={`max-w-4xl p-6 bg-black rounded-lg shadow-lg text-white flex mt-36 mb-20`}>
         <img
           src={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
           alt={movieDetails.title}
-          className="w-1/2 rounded-l-lg"
+          className="w-1/2 rounded-l-lg "
         />
         <div className='flex flex-col p-6 w-1/2'>
           <h1 className="text-2xl font-bold mb-2 ">{movieDetails.title}</h1>
