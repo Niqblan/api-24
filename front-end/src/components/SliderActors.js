@@ -20,6 +20,7 @@ function ActorCarousel({ movieId }) {
     fetchActors();
   }, [movieId]);
 
+  
   return (
     <div className="actor-carousel mt-7">
       <p className="reparto">Reparto</p>
