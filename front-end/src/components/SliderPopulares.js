@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
-import SliderElement from './sliderElement';
+import SliderElement from './SliderElement';
 
 function SliderComponent({ genre }) {
   const [movies, setMovies] = useState([]);
