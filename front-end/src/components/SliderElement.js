@@ -1,10 +1,12 @@
 "use client";
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState  } from 'react'
 
 export default function SliderElement({movie}) {
 
 
   const [titlePath, setTitlePath] = useState(null);
+  const router = useRouter();
 
   async function searchTitle() {
     const options = {
@@ -38,7 +40,8 @@ export default function SliderElement({movie}) {
     <swiper-slide
       lazy="true"
       className="cursor-pointer"
-        onClick={() => router.push(`/movie/${movie.id}`)}
+        onClick={() => router.push(`/movies/${movie.id}`)}
+        style={{ cursor: 'pointer' }}
     >
       <div className="h-full group ">
         <div className="relative bg-black rounded-sm">
