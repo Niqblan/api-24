@@ -35,6 +35,7 @@ function MyList() {
     };
     fetchData();
   }, [logged, user]);
+  
 
   const moveToFavorites = (film) => {
     setFavorites((prevFavorites) => [...prevFavorites, film]);
