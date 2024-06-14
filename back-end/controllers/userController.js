@@ -57,16 +57,23 @@ exports.getUserDetails = async (req, res) => {
   }
 };
 
-// Update user watchlist or watched
+// Update user watchlist, watched, or favorites
 exports.updateUserLists = async (req, res) => {
-  const { watchlist, watched } = req.body;
+  const { watchList, watched, favorites } = req.body;
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    user.watchlist = watchlist || user.watchlist;
-    user.watched = watched || user.watched;
+    if (watchList !== undefined) {
+      user.watchList = watchList;
+    }
+    if (watched !== undefined) {
+      user.watched = watched;
+    }
+    if (favorites !== undefined) {
+      user.favorites = favorites;
+    }
     await user.save();
     res.status(200).json(user);
   } catch (error) {

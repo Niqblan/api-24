@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import './SliderPopulares.css';
 
 import { useRouter } from 'next/navigation';
+import SliderElement from './sliderElement';
 
 function SliderComponent({ genre }) {
   const [movies, setMovies] = useState([]);
@@ -24,7 +24,10 @@ function SliderComponent({ genre }) {
 
   return (
     <div className='container2'>
-      <swiper-container loop={true} space-between='4' slides-per-view="6"
+      <swiper-container 
+        loop={true} 
+        space-between='4' 
+        slides-per-view="6"
         breakpoints={JSON.stringify({
           400: { slidesPerView: 1, spaceBetween: 4 },
           640: { slidesPerView: 2, spaceBetween: 4 },
@@ -42,12 +45,7 @@ function SliderComponent({ genre }) {
           "--swiper-navigation-color": "var(--swiper-theme-color)"
         }}>
         {movies.map(movie => (
-          <swiper-slide key={movie.id} onClick={() => router.push(`movies/${movie.id}`)} style={{ cursor: 'pointer' }} >
-            <img className='object-cover' src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
-            <div className="overlay">
-              <h2>{movie.title}</h2>
-            </div>
-          </swiper-slide>
+          <SliderElement key={movie.id} movie={movie} />
         ))}
       </swiper-container>
     </div>
@@ -55,3 +53,4 @@ function SliderComponent({ genre }) {
 }
 
 export default SliderComponent;
+

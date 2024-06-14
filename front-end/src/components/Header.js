@@ -25,7 +25,7 @@ export default function Header() {
           <p onClick={()=>router.push("../signUp")} className="botonH2" style={{cursor: 'pointer'}}>Regístrate</p>
         </div>
       ) : (
-        <div className='flex items-center gap-5'>
+        <div className='flex items-center gap-4'>
           <h2 className='text-[#8f928f]'>{user?.userName}</h2>
           <svg className="h-5 w-5 text-[#8f928f]" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  
             <path stroke="none" d="M0 0h24v24H0z"/>  

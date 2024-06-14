@@ -1,27 +1,9 @@
 .container2 {
-    width: 100%; 
-    height: auto;
-    max-width: 100%;
-  }
-  
-  swiper-container {
-    display: flex;
-    width: 100%;
-  }
-  
-  swiper-slide {
-    flex-shrink: 0; 
-    width: auto;
-    height: auto;
-    margin-right: 10px; 
-    background-color: rgb(108, 109, 108); 
-  }
-  
-  swiper-wrapper {
-    display: flex;
-    transition: transform 0.3s ease;
-    flex-wrap: nowrap;
-  }
+  width: 100%; 
+  height: auto;
+  max-width: 100%;
+}
+
  /*botones de inicio y registrarse de HEADER*/
   .botonH {
     padding: 0.2em;

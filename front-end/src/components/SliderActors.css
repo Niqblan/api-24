@@ -1,0 +1,32 @@
+.actor-carousel {
+  width: 100%; 
+  height: auto;
+  max-width: 100%;
+  }
+  
+  .Swiper {
+    display: flex;
+    width: 100%;
+  }
+  
+  .SwiperSlide {
+  flex-shrink: 0; 
+  width: auto;
+  height: auto;
+  margin-right: 0px; 
+  }
+  
+  .actor-slide {
+    text-align: center;
+    width: 5em;
+    height: auto;
+  }
+  
+  .actor-slide p {
+    margin-top: 5px;
+    font-size: 12px; 
+  }
+
+  
+
+  

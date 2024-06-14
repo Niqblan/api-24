@@ -1,129 +1,145 @@
-"use client";
+'use client';
 import './style.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from '@/context/Context';
 
-function Watchlist() {
+function MyList() {
+  const { user, logged, updateUserList, removeFromList } = useContext(Context);
   const [watchList, setWatchList] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [watched, setWatched] = useState([]);
   const [activeList, setActiveList] = useState('watchList');
-  const [listsVisible, setListsVisible] = useState(true); 
 
-  const films = [1011985, 550, 27205, 157336, 324857, 299534, 122, 272, 389, 13, 128, 429, 500, 769, 854];
-
-  // Función para buscar y agregar video a la lista de espera
-  async function searchVideo(id) {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmJkMWYyODI1ZGQ1Zjc0ZjAxYWI2MzYwZmY2ZmFhNSIsInN1YiI6IjYyYjI1MmM2NzUxMTBkMDA1MDllYWRhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4bS5LtZJr43TsfGTyi-ykQ1W5Lt1sc77t3pXcsHOX1Y",
-      },
-    };
+  const fetchMovieDetails = async (id) => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?language=en-US&video=true&append_to_response=videos&include_video=true`,
-        options
-      );
-      const data = await response.json();
-      setWatchList((prevWatchList) => [...prevWatchList, data]);
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en&api_key=5db3f946279d2d0bc22ef0c02f471fa8`);
+      if (!response.ok) throw new Error('Failed to fetch movie details');
+      return await response.json();
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching movie details:', error);
+      return null;
     }
-  }
+  };
 
   useEffect(() => {
-    films.forEach((f) => searchVideo(f));
-  }, []);
+    const fetchData = async () => {
+      if (logged) {
+        const fetchDetails = async (list) => {
+          const details = await Promise.all(list.map(id => fetchMovieDetails(id)));
+          return details.filter(film => film !== null);
+        };
+        setWatchList(await fetchDetails(user.watchList || []));
+        setFavorites(await fetchDetails(user.favorites || []));
+        setWatched(await fetchDetails(user.watched || []));
+      }
+    };
+    fetchData();
+  }, [logged, user]);
 
   const moveToFavorites = (film) => {
     setFavorites((prevFavorites) => [...prevFavorites, film]);
-    setWatchList((prevWatchList) => prevWatchList.filter((item) => item.id !== film.id));
+    setWatchList(prev => prev.filter(item => item.id !== film.id));
+    updateUserList(film.id, 'watchList', 'favorites');
   };
 
   const moveToWatched = (film) => {
-    setWatched((prevWatched) => [...prevWatched, film]);
-    setFavorites((prevFavorites) => prevFavorites.filter((item) => item.id !== film.id));
-    setWatchList((prevWatchList) => prevWatchList.filter((item) => item.id !== film.id));
+    setWatched(prev => [...prev, film]);
+    if (activeList === 'favorites') {
+      setFavorites(prev => prev.filter(item => item.id !== film.id));
+    } else {
+      setWatchList(prev => prev.filter(item => item.id !== film.id));
+    }
+    updateUserList(film.id, activeList, 'watched');
   };
 
-  const removeFromList = (list, film) => {
-    list((prevList) => prevList.filter((item) => item.id !== film.id));
+  const handleRemoveFromList = async (film) => {
+    removeFromList(activeList, film.id);
+    if (activeList === 'watchList') {
+      setWatchList(prev => prev.filter(item => item.id !== film.id));
+    } else if (activeList === 'favorites') {
+      setFavorites(prev => prev.filter(item => item.id !== film.id));
+    } else if (activeList === 'watched') {
+      setWatched(prev => prev.filter(item => item.id !== film.id));
+    }
+
   };
 
-  const renderList = (list, setList, additionalButtons = []) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-      {list.length > 0 &&
-        list.map((film) => (
-          <div key={film.id} className="carta1">
-            <img
-              src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
-              alt={film.title}
-              className="w-full h-[350px] object-center"
-            />
-            <h2 className="peli">{film.title}</h2>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {additionalButtons.map((button) => (
+  const renderList = (list) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 pt-5 mb-20">
+      {list.map((film) => (
+        <div key={film.id} className="carta1">
+          <img
+            src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
+            alt={film.title}
+            className="w-full min-h-fit object-center"
+          />
+          <h2 className="peli">{film.title}</h2>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {activeList === 'watchList' && (
+              <>
                 <button
-                  key={button.label}
                   className="text-gray-400 flex-1"
-                  onClick={() => button.onClick(film)}
+                  onClick={() => moveToFavorites(film)}
                 >
-                  {button.label}
+                  Mover a Favoritos
                 </button>
-              ))}
-            </div>
-            <button className="text-red-500 flex-1 mt-3" onClick={() => removeFromList(setList, film)}>Eliminar</button>
+                <button
+                  className="text-gray-400 flex-1"
+                  onClick={() => moveToWatched(film)}
+                >
+                  Mover a Vistas
+                </button>
+              </>
+            )}
+            {activeList === 'favorites' && (
+              <button
+                className="text-gray-400 flex-1"
+                onClick={() => moveToWatched(film)}
+              >
+                Mover a Vistas
+              </button>
+            )}
           </div>
-        ))}
+          <button className="text-red-500 flex-1 mt-3" onClick={() => handleRemoveFromList(film)}>Eliminar</button>
+        </div>
+      ))}
     </div>
   );
 
-  const showLists = () => {
-    setListsVisible(true);
-  };
-
   return (
-    <div className="flex flex-col w-full min-h-screen h-full pt-16 items-center">
-      <div className="flex flex-wrap gap-2 mb-4 mt-14">
+    <div className="flex flex-col w-full h-4/5 items-center">
+      <div className="flex flex-wrap gap-2 mb-4 mt-16">
         <button
-          className={`button1 ${activeList === 'watchList' ? 'active' : ''}`}
-          onClick={() => { setActiveList('watchList'); showLists(); }}
+          className={`btn1 ${activeList === 'watchList' ? 'active' : ''}`}
+          onClick={() => setActiveList('watchList')}
         >
           Quiero Ver
         </button>
         <button
-          className={`button2 ${activeList === 'favorites' ? 'active' : ''}`}
-          onClick={() => { setActiveList('favorites'); showLists(); }}
+          className={`btn1 ${activeList === 'favorites' ? 'active' : ''}`}
+          onClick={() => setActiveList('favorites')}
         >
           Favoritos
         </button>
         <button
-          className={`button3 ${activeList === 'watched' ? 'active' : ''}`}
-          onClick={() => { setActiveList('watched'); showLists(); }}
+          className={`btn2 ${activeList === 'watched' ? 'active' : ''}`}
+          onClick={() => setActiveList('watched')}
         >
           Vistas
         </button>
       </div>
-      {listsVisible && (
-        <div className="flex flex-col items-center gap-4 w-full">
-          {activeList === 'watchList' &&
-            renderList(watchList, setWatchList, [
-              { label: 'Mover a Favoritos', onClick: moveToFavorites },
-              { label: 'Mover a Vistas', onClick: moveToWatched }
-            ])}
-          {activeList === 'favorites' &&
-            renderList(favorites, setFavorites, [
-              { label: 'Mover a Vistas', onClick: moveToWatched },
-            ])}
-          {activeList === 'watched' &&
-            renderList(watched, setWatched)}
-        </div>
-      )}
+      <div className="flex flex-col items-center gap-4 w-full">
+        {activeList === 'watchList' && renderList(watchList)}
+        {activeList === 'favorites' && renderList(favorites)}
+        {activeList === 'watched' && renderList(watched)}
+      </div>
     </div>
   );
 }
 
-export default Watchlist;
+export default MyList;
+
+
+
+
 
