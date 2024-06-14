@@ -29,7 +29,7 @@ const MovieSearch = () => {
           const movieCreditsData = await movieCreditsResponse.json();
           setFilteredMovies(movieCreditsData.cast.map(movie => ({
             ...movie,
-            isClosed: true // Añade el estado individual para cada película
+            isClosed: false // Añade el estado individual para cada película
           })));
         } else {
           setFilteredMovies([]);
@@ -47,7 +47,7 @@ const MovieSearch = () => {
           const movieCreditsData = await movieCreditsResponse.json();
           setFilteredMovies(movieCreditsData.crew.filter(movie => movie.department === "Directing").map(movie => ({
             ...movie,
-            isClosed: true // Añade el estado individual para cada película
+            isClosed: false // Añade el estado individual para cada película
           })));
         } else {
           setFilteredMovies([]);
@@ -59,7 +59,7 @@ const MovieSearch = () => {
         const data = await response.json();
         setFilteredMovies(data.results.map(movie => ({
           ...movie,
-          isClosed: true // Añade el estado individual para cada película
+          isClosed: false // Añade el estado individual para cada película
         })));
       } else {
         // Búsqueda por título de película
@@ -68,7 +68,7 @@ const MovieSearch = () => {
         const data = await response.json();
         setFilteredMovies(data.results.map(movie => ({
           ...movie,
-          isClosed: true // Añade el estado individual para cada película
+          isClosed: false // Añade el estado individual para cada película
         })));
       }
     } catch (error) {
