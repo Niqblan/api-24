@@ -8,7 +8,7 @@ import SliderActors from '@/components/SliderActors';
 function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
-  const [isClosed, setIsClosed] = useState(true);
+  const [isClosed, setIsClosed] = useState(false);
   const { logged, addToWatchList, removeFromWatchList } = useContext(Context);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function MovieDetails() {
 
   const handleToggleWatchList = () => {
     if (logged) {
-      if (isClosed) {
+      if (!isClosed) {
         addToWatchList(id);
       } else {
         removeFromWatchList(id);
@@ -67,8 +67,8 @@ function MovieDetails() {
   const genres = movieDetails.genres.map(genre => genre.name).join(', ');
 
   return (
-    <div className="flex flex-col items-center w-[100vw] min-h-fit"> 
-      <div className="max-w-4xl p-6 bg-black rounded-lg shadow-lg text-white flex mt-36">
+    <div className="flex flex-col items-center w-full min-h-fit"> 
+      <div className={`max-w-4xl p-6 bg-black rounded-lg shadow-lg text-white flex ${logged ? 'mt-72 mb-16' : 'mt-36'}`}>`
         <img
           src={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
           alt={movieDetails.title}
@@ -85,8 +85,8 @@ function MovieDetails() {
             Ver Tráiler
           </button>
           {logged && (
-            <div className="flex">
-              <p className="text-center mt-7">Mi Lista </p>
+            <div className="flex mt-4">
+              <p className="text-center">Mi Lista </p>
               <button
                 onClick={handleToggleWatchList}
                 style={{
@@ -94,7 +94,7 @@ function MovieDetails() {
                   height: "50px",
                   display: "grid",
                   placeItems: "center",
-                  marginTop: "20px",
+                  marginLeft: "10px",
                 }}
               >
                 <BurgerSpin isClosed={isClosed} />

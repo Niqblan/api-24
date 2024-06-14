@@ -16,7 +16,7 @@ function FiltradoPorGenero({ genre }) {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${id}&language=en&api_key=5db3f946279d2d0bc22ef0c02f471fa8`);
         const data = await response.json();
-        setFilteredMovies(data.results.map(movie => ({ ...movie, isClosed: true })));
+        setFilteredMovies(data.results.map(movie => ({ ...movie, isClosed: false })));
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
