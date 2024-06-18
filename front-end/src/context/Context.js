@@ -238,6 +238,26 @@ async function removeFromList(listName, itemId) {
     }
 }
 
+async function checkEmailExists(email) {
+    try {
+        const response = await fetch(`http://localhost:5000/api/users/checkEmail`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+        if (!response.ok) {
+            throw new Error('Error en la petición');
+        }
+        const data = await response.json();
+        return data.exists; 
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
     return (
         <Context.Provider value={{
             user,
@@ -257,6 +277,7 @@ async function removeFromList(listName, itemId) {
             setFavorites,
             setWatched,
             logError, 
+            checkEmailExists
         }}>
             {children}
         </Context.Provider>
