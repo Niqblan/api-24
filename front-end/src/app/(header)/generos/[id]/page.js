@@ -34,12 +34,16 @@ function FiltradoPorGenero({ genre }) {
 
     const movie = filteredMovies[index];
     
-    if (movie.isClosed) {
+    if (!movie.isClosed) {
       addToWatchList(movie.id);
     } else {
       removeFromWatchList(movie.id);
     }
   };
+
+  if (!filteredMovies.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="mx-auto px-4 py-8 max-w-full h-full">
