@@ -1,25 +1,34 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './styles.css';
+import { Context } from '@/context/Context';
+
 
 export default function ResetPassword() {
+  const { checkEmailExists } = useContext(Context);
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí iría la lógica para enviar el correo electrónico
 
-    // Simulando el envío del correo, cambia el estado para mostrar la alerta
+    const emailExists = await checkEmailExists(email);
+    if (!emailExists) {
+      setEmailError('Correo electrónico no encontrado');
+      setTimeout(() => {
+        setEmailError('');
+      }, 3000);
+      return;
+    }
+    setEmailError('');
     setEmailSent(true);
   };
 
   return (
-    <div className="container h-full">
-      <a href='./signIn' className="back-button">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+    <div className="container h-auto">
+      <a href='./signIn' className="back-button">Iniciar Sesión
+        
       </a>
       <div className="card">
         <div className="card2">
@@ -32,12 +41,13 @@ export default function ResetPassword() {
               </svg>
               <input type="text" className="input-field" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
+            {emailError && <p className="error-message">{emailError}</p>}
             <div className="btn">
               <button type="submit" className="button1">Enviar correo</button>
             </div>
           </form>
           {emailSent && (
-            <div className="alert px-3">
+            <div className="alert px-3 text-gray-300">
               Correo enviado correctamente
             </div>
           )}

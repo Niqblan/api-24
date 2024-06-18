@@ -81,6 +81,23 @@ exports.updateUserLists = async (req, res) => {
   }
 };
 
+// Check si el mail existe
+ exports.checkEmailExists = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+    if (user) {
+      return res.json({ exists: true });
+    } else {
+      return res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error en la petición' });
+  }
+};
+
 
 // Delete user
 exports.deleteUser = async (req, res) => {

@@ -102,7 +102,7 @@ body { /*fondo*/
     padding: 0.5em;
     padding-left: 2em;
     padding-right: 2em;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-right: 0.5em;
     border: none;
     outline: none;
@@ -142,21 +142,35 @@ body { /*fondo*/
 
   /* Estilos para el botón de flecha */
 .back-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  transition: .4s ease-in-out;
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  color: rgb(0, 0, 0);
   }
   
-  .back-button svg {
-    width: 30px;
-    height: 30px;
+  .back-button:hover {
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
     color: rgb(0, 255, 200);
   }
-  
-  .back-button:hover svg {
-    color: #3700ff;
+
+  .error-message {
+    color: rgb(226, 152, 152);
+    font-weight: bold;
+    margin-top: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
   }
+  .error-message.hidden {
+    opacity: 0;
+  }
+  
   
