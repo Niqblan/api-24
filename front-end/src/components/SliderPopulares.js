@@ -25,7 +25,6 @@ function SliderComponent({ genre }) {
   return (
     <div className='container2'>
       <swiper-container 
-        loop={true} 
         space-between='4' 
         slides-per-view="6"
         breakpoints={JSON.stringify({

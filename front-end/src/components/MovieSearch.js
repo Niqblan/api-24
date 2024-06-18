@@ -105,7 +105,7 @@ const MovieSearch = () => {
 
     const movie = filteredMovies[index];
 
-    if (movie.isClosed) {
+    if (!movie.isClosed) {
       addToWatchList(movie.id);
     } else {
       removeFromWatchList(movie.id);
