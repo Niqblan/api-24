@@ -4,10 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Context } from '@/context/Context';
 
 function MyList() {
-  const { user, logged, updateUserList, removeFromList } = useContext(Context);
-  const [watchList, setWatchList] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const { user, logged, addToFavorites, removeFromList, addToWatched, watchList, setWatchList, favorites, setFavorites, watched, setWatched } = useContext(Context);
   const [activeList, setActiveList] = useState('watchList');
 
   const fetchMovieDetails = async (id) => {
@@ -38,23 +35,26 @@ function MyList() {
   
 
   const moveToFavorites = (film) => {
-    setFavorites((prevFavorites) => [...prevFavorites, film]);
+    addToFavorites(film.id);
+    setFavorites(prevFavorites => [...prevFavorites, film]);
+    removeFromList('watchList', film.id);
     setWatchList(prev => prev.filter(item => item.id !== film.id));
-    updateUserList(film.id, 'watchList', 'favorites');
+    
   };
-
+  
   const moveToWatched = (film) => {
-    setWatched(prev => [...prev, film]);
+    addToWatched(film.id);
     if (activeList === 'favorites') {
+      removeFromList(activeList, film.id);
       setFavorites(prev => prev.filter(item => item.id !== film.id));
     } else {
+      removeFromList(activeList, film.id);
       setWatchList(prev => prev.filter(item => item.id !== film.id));
     }
-    updateUserList(film.id, activeList, 'watched');
+    setWatched(prev => [...prev, film]);
   };
 
   const handleRemoveFromList = async (film) => {
-    removeFromList(activeList, film.id);
     if (activeList === 'watchList') {
       setWatchList(prev => prev.filter(item => item.id !== film.id));
     } else if (activeList === 'favorites') {
@@ -62,7 +62,7 @@ function MyList() {
     } else if (activeList === 'watched') {
       setWatched(prev => prev.filter(item => item.id !== film.id));
     }
-
+    removeFromList(activeList, film.id);
   };
 
   const renderList = (list) => (
