@@ -8,8 +8,11 @@ export const Provider = ({ children }) => {
     const router = useRouter();
     const [user, setUser] = useState({});
     const [logged, setLogged] = useState(false);
-
     const [logError, setLogError] = useState(false);
+
+    const [watchList, setWatchList] = useState([]);
+    const [favorites, setFavorites] = useState([]);
+    const [watched, setWatched] = useState([]);
 
     function handleLogError() {
         setLogError(true);
@@ -81,17 +84,16 @@ export const Provider = ({ children }) => {
         setLogged(false);
     };
 
-    async function addToWatchList(movieId) {  // Función para añadir una película a la watchlist
-        if (!logged) {
-            console.error("User is not logged in");
+    async function addToWatchList(movieId) {  // Función para añadir una película a la quiero ver
+        if (!user.watchList.includes(movieId)) {
+           user.watchList.push(movieId);
+        } else {
             return;
         }
 
-        const updatedWatchList = [...user.watchList, movieId];
-
         const options = {
             method: 'put',
-            body: JSON.stringify({ watchList: updatedWatchList }),
+            body: JSON.stringify({ watchList: user.watchList}),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -108,7 +110,66 @@ export const Provider = ({ children }) => {
             })
             .then((data) => {
                 console.log("Lista actualizada", data);
-                setUser({ ...user, watchList: updatedWatchList }); // Actualiza el usuario con la nueva lista de seguimiento
+            })
+            .catch((error) => console.log(error));
+    }
+
+    async function addToFavorites(movieId) {  // Función para añadir una película a la favoritas
+        if (!user.favorites.includes(movieId)) {
+           user.favorites.push(movieId);
+        } else {
+            return;
+        }
+
+        const options = {
+            method: 'put',
+            body: JSON.stringify({ favorites: user.favorites}),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        await fetch(`http://localhost:5000/api/users/${user._id}`, options)
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((data) => {
+                        throw new Error('Error en la petición' || data.error);
+                    });
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log("Lista actualizada", data);
+            })
+            .catch((error) => console.log(error));
+    }
+
+    async function addToWatched(movieId) {  // Función para añadir una película a la vistas
+        if (!user.watched.includes(movieId)) {
+           user.watched.push(movieId);
+        } else {
+            return;
+        }
+
+        const options = {
+            method: 'put',
+            body: JSON.stringify({ watched: user.watched}),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        await fetch(`http://localhost:5000/api/users/${user._id}`, options)
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((data) => {
+                        throw new Error('Error en la petición' || data.error);
+                    });
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log("Lista actualizada", data);
             })
             .catch((error) => console.log(error));
     }
@@ -144,53 +205,6 @@ export const Provider = ({ children }) => {
             })
             .catch((error) => console.log(error));
     }
-
-    // Nueva función para actualizar listas del usuario
-async function updateUserList(itemId, fromList, toList) {
-    if (!logged) {
-        console.error("User is not logged in");
-        return;
-    }
-
-    // Elimina la película de la lista origen
-    const updatedFromList = user[fromList].filter(id => id !== itemId);
-
-    // Añade la película a la lista destino
-    const updatedToList = [...user[toList], itemId];
-
-    
-    const updatedUser = {
-        ...user,
-        [fromList]: updatedFromList,
-        [toList]: updatedToList,
-    };
-    
-
-    
-    const options = {
-        method: 'PUT',
-        body: JSON.stringify(updatedUser),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-  
-    try {
-        const response = await fetch(`http://localhost:5000/api/users/${user._id}`, options);
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error('Error en la petición' || data.error);
-        }
-        const data = await response.json();
-        console.log("Usuario actualizado", data);
-
-        setUser(updatedUser);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 
 async function removeFromList(listName, itemId) {
     if (!logged) {
@@ -232,9 +246,16 @@ async function removeFromList(listName, itemId) {
             logout,
             register,
             addToWatchList,
+            addToFavorites,
+            addToWatched,
             removeFromWatchList,
-            updateUserList,
             removeFromList,
+            watchList,
+            favorites,
+            watched,
+            setWatchList,
+            setFavorites,
+            setWatched,
             logError, 
         }}>
             {children}
