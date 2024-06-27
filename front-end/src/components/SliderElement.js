@@ -24,7 +24,6 @@ export default function SliderElement({movie}) {
     )
       .then((response) => response.json())
       .then((response) => {
-        // console.log("credits: ", response);
         setTitlePath(
           response.logos.find((title) => title.iso_639_1 === "en").file_path
         );
