@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import './SliderActors.css';
 
 function ActorCarousel({ movieId }) {
   const [actors, setActors] = useState([]);
@@ -20,25 +19,21 @@ function ActorCarousel({ movieId }) {
     fetchActors();
   }, [movieId]);
 
-  
   return (
-    <div className="actor-carousel mt-7">
-      <p className="reparto">Reparto</p>
+    <div className="mt-7 w-full h-auto max-w-full">
+      <p className="text-xl font-bold mb-4">Reparto</p>
       <Swiper
         navigation
         loop={true}
         spaceBetween={10}
-        slidesPerView={4} // Default slides per view
+        slidesPerView={4}
         breakpoints={{
-          // When window width is >= 768px
           768: {
             slidesPerView: 2,
           },
-          // When window width is >= 992px
           992: {
             slidesPerView: 3,
           },
-          // When window width is >= 1200px
           1200: {
             slidesPerView: 4,
           },
@@ -53,13 +48,13 @@ function ActorCarousel({ movieId }) {
       >
         {actors.map((actor) => (
           <SwiperSlide key={actor.id}>
-            <div className="actor-slide">
+            <div className="text-center w-20 h-auto">
               <img
                 src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
                 alt={actor.name}
-                className="actor-image"
+                className="w-full h-auto rounded"
               />
-              <p>{actor.name}</p>
+              <p className="mt-2 text-xs">{actor.name}</p>
             </div>
           </SwiperSlide>
         ))}

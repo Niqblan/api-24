@@ -9,7 +9,7 @@ import { Context } from '@/context/Context';
 export default function Header() {
 
   const router = useRouter()
-  const { logged, user }=useContext(Context)
+  const { logged, user, logout }=useContext(Context)
 
   return (
     <div className="bg-black w-full py-4 px-4 flex flex-wrap items-center justify-between fixed z-[99] top-0 ">
@@ -32,7 +32,7 @@ export default function Header() {
             <circle cx="12" cy="7" r="4" />  
             <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
           </svg> 
-          <p onClick={()=>router.push("../signIn")} className="botonH3" style={{cursor: 'pointer'}}>Cerrar Sesión</p>
+          <p onClick={logout} className="botonH3" style={{cursor: 'pointer'}}>Cerrar Sesión</p>
         </div>
       )}
     </div>
