@@ -47,6 +47,9 @@ export default function Inicio() {
               <div className="btn2">
                 <a href='./reset-password' className="button3" >¿Olvidaste tu contraseña?</a>
               </div>
+              <div className="btn2">
+              <a type="button" className="button2" href="./"  >Entrar como invitado</a>
+              </div>
             </form>
           </div>
         </div>

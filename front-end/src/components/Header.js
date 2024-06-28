@@ -11,6 +11,11 @@ export default function Header() {
   const router = useRouter()
   const { logged, user, logout }=useContext(Context)
 
+  const handleLogout = () => {
+    logout()
+    router.push('/signIn')
+  }
+
   return (
     <div className="bg-black w-full py-4 px-4 flex flex-wrap items-center justify-between fixed z-[99] top-0 ">
       <p onClick={()=>router.push("/")} className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" style={{cursor: 'pointer' , backgroundImage: 'linear-gradient(163deg, #00ff75 0%, #3700ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Esto Es Cine</p>
@@ -32,7 +37,7 @@ export default function Header() {
             <circle cx="12" cy="7" r="4" />  
             <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
           </svg> 
-          <p onClick={logout} className="botonH3" style={{cursor: 'pointer'}}>Cerrar Sesión</p>
+          <p onClick={handleLogout} className="botonH3" style={{cursor: 'pointer'}}>Cerrar Sesión</p>
         </div>
       )}
     </div>

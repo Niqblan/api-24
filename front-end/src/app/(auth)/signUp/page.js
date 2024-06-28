@@ -7,11 +7,12 @@ export default function PaginaRegistro() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const { register } = useContext(Context);
+    const { register, logout } = useContext(Context);
   
 
   const handleRegister = (event) => {
     event.preventDefault();
+    logout();
     register({
       email: email,
       password: password,
