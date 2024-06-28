@@ -54,16 +54,8 @@ export default function Home() {
         <SliderComponent genre={18} />
       </div>
       <div className='flex flex-col gap-2 h-auto px-8'>
-        <h1 onClick={()=>router.push(`generos/${99}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Documentales</h1>
-        <SliderComponent genre={99} />
-      </div>
-      <div className='flex flex-col gap-2 h-auto px-8'>
         <h1 onClick={()=>router.push(`generos/${36}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Historia</h1>
         <SliderComponent genre={36} />
-      </div>
-      <div className='flex flex-col gap-2 h-auto px-8'>
-        <h1 onClick={()=>router.push(`generos/${10402}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Musicales</h1>
-        <SliderComponent genre={10402} />
       </div>
       <div className='flex flex-col gap-2 h-auto px-8'>
         <h1 onClick={()=>router.push(`generos/${37}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Cowboys</h1>
@@ -84,6 +76,14 @@ export default function Home() {
       <div className='flex flex-col gap-2 h-auto px-8'>
         <h1 onClick={()=>router.push(`generos/${10749}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Romance</h1>
         <SliderComponent genre={10749}/>
+      </div>
+      <div className='flex flex-col gap-2 h-auto px-8'>
+        <h1 onClick={()=>router.push(`generos/${10402}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Musicales</h1>
+        <SliderComponent genre={10402} />
+      </div>
+      <div className='flex flex-col gap-2 h-auto px-8'>
+        <h1 onClick={()=>router.push(`generos/${99}`)} className="titulo max-w-fit" style={{ cursor: 'pointer' }}>Documentales</h1>
+        <SliderComponent genre={99} />
       </div>
     </div>  
     <footer

@@ -13,14 +13,14 @@ export default function MovieFilters() {
     { id: 27, nombre: "Terror" },
     { id: 53, nombre: "Suspenso" },
     { id: 18, nombre: "Drama" },
-    { id: 99, nombre: "Documentales" },
     { id: 36, nombre: "Historia" },
-    { id: 10402, nombre: "Musicales" },
     { id: 37, nombre: "Cowboys" },
     { id: 14, nombre: "Fantasía" },
     { id: 10752, nombre: "Guerra" },
     { id: 80, nombre: "Crimen" },
     { id: 10749, nombre: "Romance" },
+    { id: 10402, nombre: "Musicales" },
+    { id: 99, nombre: "Documentales" },
   ];
 
   const handleChange = (event) => {
