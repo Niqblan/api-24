@@ -13,7 +13,6 @@ export default function Header() {
 
   const handleLogout = () => {
     logout()
-    router.push('/signIn')
   }
 
   return (
